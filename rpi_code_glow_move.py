@@ -25,16 +25,16 @@ def count_fingers(hand_landmarks, handedness_label):
     fingers = 0 #initialise finger count 
 
     if handedness_label == "Right":
-        if lm[TIP_IDS[0]].x < lm[TIP_IDS[0] - 1].x: #for right thumb (x-axis comparison)
+        if lm[TIP_IDS[0]].x > lm[TIP_IDS[0] - 1].x: #for right thumb (x-axis comparison) # in theory it should be < but our camera position is reversed so logic reversed
             fingers += 1
     else:
-        if lm[TIP_IDS[0]].x > lm[TIP_IDS[0] - 1].x: #for left thumb (x-axis comparison)
+        if lm[TIP_IDS[0]].x < lm[TIP_IDS[0] - 1].x: #for left thumb (x-axis comparison) # in theory it should be < but our camera position is reversed so logic reversed
             fingers += 1
 
     for i in range(1, 5): #for other four fingers (y-axis comparison)
         tip = TIP_IDS[i] #tip landmark index
         pip = tip - 2 #proximal pip joint landmark index
-        if lm[tip].y < lm[pip].y: 
+        if lm[tip].y > lm[pip].y: # in theory it should be < but our camera position is reversed so logic reversed
             fingers += 1
 
     return fingers
