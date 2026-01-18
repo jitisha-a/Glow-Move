@@ -8,8 +8,8 @@ SERIAL_PORT = "/dev/ttyACM0"
 BAUD = 115200
 
 ROUND_COUNT = 20 #number of colour flashes
-ROUND_WINDOW_SECONDS = 2.0 #time window to show the gesture
-REST_SECONDS = 0.15 #rest time between colours
+ROUND_WINDOW_SECONDS = 4.0 #time window to show the gesture
+REST_SECONDS = 2.0 #rest time between colours
 
 COLORS = ["RED", "GREEN", "BLUE", "YELLOW"]
 
@@ -158,10 +158,7 @@ def main():
 
             time.sleep(REST_SECONDS)
 
-    time.sleep(0.3)
-    
     print(f"\nGame over!! Final score: {score}/{ROUND_COUNT}")
-
     send_cmd(ser, "END")
     time.sleep(0.3)
     send_cmd(ser, "OFF")
